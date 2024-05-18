@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+package psi;
+
+service DataTransfer{
+    rpc PrepareForPSI (PrepareForPSIRequest) returns (google.protobuf.Empty);
+    rpc SendEncryptedArray (SendEncryptedArrayRequest) returns (google.protobuf.Empty);
+}
+
+message PrepareForPSIRequest {
+    uint32 index = 1;
+}
+
+// Type: np.uint64
+message SendEncryptedArrayRequest {
+    bytes values = 1;
+}
