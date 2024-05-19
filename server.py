@@ -19,6 +19,8 @@ class PSIServicer(psi_pb2_grpc.DataTransferServicer):
         self.X = None
         self.Y = None
         self.Y_sorted = None
+        self.received_encrypted_array = None # Received from another server
+        self.received_pairs = None
 
     def _encrypt(self, array):
         result = np.array([pow(int(x), self.private_key, self.domain["p"]) for x in array], dtype=np.uint64)
@@ -43,6 +45,31 @@ class PSIServicer(psi_pb2_grpc.DataTransferServicer):
 
         print("Hashes encrypted and sorted!")
         print(f"Encrypted and sorted hashes: {self.Y_sorted}")
+        return empty_pb2.Empty()
+    
+
+    def SendEncryptedArray(self, request, context):
+        serialized_array = self.Y_sorted.tobytes()
+        return psi_pb2.SendEncryptedArrayResponse(values=serialized_array)
+    
+    def ReceiveEncryptedArray(self, request, context):
+        self.received_encrypted_array = np.frombuffer(request.encrypted_values, dtype=np.uint64)
+        print(f"Received encrypted array: {self.received_encrypted_array}")
+        return empty_pb2.Empty()
+
+    def GetPairs(self, request, context):
+        """From the received encrypted array, it returns (y, enc(y))"""
+        pairs = []
+        fy = self._encrypt(self.received_encrypted_array)
+        if self.received_encrypted_array is not None:
+            for i, y in enumerate(self.received_encrypted_array):
+                pair = psi_pb2.Pair(y=y, fy=fy[i])
+                pairs.append(pair)
+        return psi_pb2.GetPairsResponse(pairs=pairs)
+    
+    def SendPairs(self, request, context):
+        self.received_pairs = request.pairs
+        print(f"Received pairs: {self.received_pairs}")
         return empty_pb2.Empty()
     
     

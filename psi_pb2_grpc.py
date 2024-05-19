@@ -47,7 +47,22 @@ class DataTransferStub(object):
                 _registered_method=True)
         self.SendEncryptedArray = channel.unary_unary(
                 '/psi.DataTransfer/SendEncryptedArray',
-                request_serializer=psi__pb2.SendEncryptedArrayRequest.SerializeToString,
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=psi__pb2.SendEncryptedArrayResponse.FromString,
+                _registered_method=True)
+        self.ReceiveEncryptedArray = channel.unary_unary(
+                '/psi.DataTransfer/ReceiveEncryptedArray',
+                request_serializer=psi__pb2.ReceiveEncryptedArrayRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                _registered_method=True)
+        self.GetPairs = channel.unary_unary(
+                '/psi.DataTransfer/GetPairs',
+                request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+                response_deserializer=psi__pb2.GetPairsResponse.FromString,
+                _registered_method=True)
+        self.SendPairs = channel.unary_unary(
+                '/psi.DataTransfer/SendPairs',
+                request_serializer=psi__pb2.SendPairsRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 _registered_method=True)
 
@@ -67,6 +82,24 @@ class DataTransferServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ReceiveEncryptedArray(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetPairs(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SendPairs(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_DataTransferServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -77,7 +110,22 @@ def add_DataTransferServicer_to_server(servicer, server):
             ),
             'SendEncryptedArray': grpc.unary_unary_rpc_method_handler(
                     servicer.SendEncryptedArray,
-                    request_deserializer=psi__pb2.SendEncryptedArrayRequest.FromString,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=psi__pb2.SendEncryptedArrayResponse.SerializeToString,
+            ),
+            'ReceiveEncryptedArray': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReceiveEncryptedArray,
+                    request_deserializer=psi__pb2.ReceiveEncryptedArrayRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'GetPairs': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetPairs,
+                    request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                    response_serializer=psi__pb2.GetPairsResponse.SerializeToString,
+            ),
+            'SendPairs': grpc.unary_unary_rpc_method_handler(
+                    servicer.SendPairs,
+                    request_deserializer=psi__pb2.SendPairsRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
     }
@@ -132,7 +180,88 @@ class DataTransfer(object):
             request,
             target,
             '/psi.DataTransfer/SendEncryptedArray',
-            psi__pb2.SendEncryptedArrayRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            psi__pb2.SendEncryptedArrayResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ReceiveEncryptedArray(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/psi.DataTransfer/ReceiveEncryptedArray',
+            psi__pb2.ReceiveEncryptedArrayRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetPairs(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/psi.DataTransfer/GetPairs',
+            google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            psi__pb2.GetPairsResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def SendPairs(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/psi.DataTransfer/SendPairs',
+            psi__pb2.SendPairsRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options,
             channel_credentials,

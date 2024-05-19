@@ -5,7 +5,10 @@ package psi;
 
 service DataTransfer{
     rpc PrepareForPSI (PrepareForPSIRequest) returns (google.protobuf.Empty);
-    rpc SendEncryptedArray (SendEncryptedArrayRequest) returns (google.protobuf.Empty);
+    rpc SendEncryptedArray (google.protobuf.Empty) returns (SendEncryptedArrayResponse);
+    rpc ReceiveEncryptedArray (ReceiveEncryptedArrayRequest) returns (google.protobuf.Empty);
+    rpc GetPairs (google.protobuf.Empty) returns (GetPairsResponse);
+    rpc SendPairs (SendPairsRequest) returns (google.protobuf.Empty);
 }
 
 message PrepareForPSIRequest {
@@ -13,6 +16,23 @@ message PrepareForPSIRequest {
 }
 
 // Type: np.uint64
-message SendEncryptedArrayRequest {
+message SendEncryptedArrayResponse {
     bytes values = 1;
+}
+
+message ReceiveEncryptedArrayRequest {
+    bytes encrypted_values = 1;
+}
+
+message Pair {
+    uint64 y = 1;
+    uint64 fy = 2;
+}
+
+message GetPairsResponse {
+    repeated Pair pairs = 1;
+}
+
+message SendPairsRequest {
+    repeated Pair pairs = 1;
 }
