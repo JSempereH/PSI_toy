@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\tpsi.proto\x12\x03psi\x1a\x1bgoogle/protobuf/empty.proto\"%\n\x14PrepareForPSIRequest\x12\r\n\x05index\x18\x01 \x01(\r\",\n\x1aSendEncryptedArrayResponse\x12\x0e\n\x06values\x18\x01 \x01(\x0c\"8\n\x1cReceiveEncryptedArrayRequest\x12\x18\n\x10\x65ncrypted_values\x18\x01 \x01(\x0c\"\x1d\n\x04Pair\x12\t\n\x01y\x18\x01 \x01(\x04\x12\n\n\x02\x66y\x18\x02 \x01(\x04\",\n\x10GetPairsResponse\x12\x18\n\x05pairs\x18\x01 \x03(\x0b\x32\t.psi.Pair\",\n\x10SendPairsRequest\x12\x18\n\x05pairs\x18\x01 \x03(\x0b\x32\t.psi.Pair2\xec\x02\n\x0c\x44\x61taTransfer\x12\x42\n\rPrepareForPSI\x12\x19.psi.PrepareForPSIRequest\x1a\x16.google.protobuf.Empty\x12M\n\x12SendEncryptedArray\x12\x16.google.protobuf.Empty\x1a\x1f.psi.SendEncryptedArrayResponse\x12R\n\x15ReceiveEncryptedArray\x12!.psi.ReceiveEncryptedArrayRequest\x1a\x16.google.protobuf.Empty\x12\x39\n\x08GetPairs\x12\x16.google.protobuf.Empty\x1a\x15.psi.GetPairsResponse\x12:\n\tSendPairs\x12\x15.psi.SendPairsRequest\x1a\x16.google.protobuf.Emptyb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\tpsi.proto\x12\x03psi\x1a\x1bgoogle/protobuf/empty.proto\"%\n\x14PrepareForPSIRequest\x12\r\n\x05index\x18\x01 \x01(\r\",\n\x1aSendEncryptedArrayResponse\x12\x0e\n\x06values\x18\x01 \x01(\x0c\"8\n\x1cReceiveEncryptedArrayRequest\x12\x18\n\x10\x65ncrypted_values\x18\x01 \x01(\x0c\"\x1d\n\x04Pair\x12\t\n\x01y\x18\x01 \x01(\x04\x12\n\n\x02\x66y\x18\x02 \x01(\x04\",\n\x10GetPairsResponse\x12\x18\n\x05pairs\x18\x01 \x03(\x0b\x32\t.psi.Pair\",\n\x10SendPairsRequest\x12\x18\n\x05pairs\x18\x01 \x03(\x0b\x32\t.psi.Pair2\xad\x03\n\x0c\x44\x61taTransfer\x12\x42\n\rPrepareForPSI\x12\x19.psi.PrepareForPSIRequest\x1a\x16.google.protobuf.Empty\x12M\n\x12SendEncryptedArray\x12\x16.google.protobuf.Empty\x1a\x1f.psi.SendEncryptedArrayResponse\x12R\n\x15ReceiveEncryptedArray\x12!.psi.ReceiveEncryptedArrayRequest\x1a\x16.google.protobuf.Empty\x12\x39\n\x08GetPairs\x12\x16.google.protobuf.Empty\x1a\x15.psi.GetPairsResponse\x12:\n\tSendPairs\x12\x15.psi.SendPairsRequest\x1a\x16.google.protobuf.Empty\x12?\n\rCompareValues\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Emptyb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -35,5 +35,5 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_SENDPAIRSREQUEST']._serialized_start=267
   _globals['_SENDPAIRSREQUEST']._serialized_end=311
   _globals['_DATATRANSFER']._serialized_start=314
-  _globals['_DATATRANSFER']._serialized_end=678
+  _globals['_DATATRANSFER']._serialized_end=743
 # @@protoc_insertion_point(module_scope)

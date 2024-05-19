@@ -9,6 +9,7 @@ service DataTransfer{
     rpc ReceiveEncryptedArray (ReceiveEncryptedArrayRequest) returns (google.protobuf.Empty);
     rpc GetPairs (google.protobuf.Empty) returns (GetPairsResponse);
     rpc SendPairs (SendPairsRequest) returns (google.protobuf.Empty);
+    rpc CompareValues (google.protobuf.Empty) returns (google.protobuf.Empty);
 }
 
 message PrepareForPSIRequest {

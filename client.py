@@ -36,6 +36,10 @@ async def send_pairs(stub, pairs):
         request = psi_pb2.SendPairsRequest(pairs=pair_messages)
         await stub.SendPairs(request)
 
+async def compare_values(stub):
+    async with lock:
+        await stub.CompareValues(empty_pb2.Empty())
+
 async def main():
     server_1_address = 'localhost:50051'
     server_2_address = 'localhost:50052'
@@ -83,6 +87,12 @@ async def main():
         # Muestra los pares recibidos de cada stub
         print(f"Pares enviados de stub1 a stub2: {pairs1}")
         print(f"Pares enviados de stub2 a stub1: {pairs2}")
+
+        # Cada uno compara los pares
+        await asyncio.gather(
+            compare_values(stub1),
+            compare_values(stub2)
+        )
 
 
 if __name__ == '__main__':

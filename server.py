@@ -7,7 +7,7 @@ import threading
 import random
 import numpy as np
 import torch
-from torch.utils.data import Dataset
+from torch.utils.data import Dataset, Subset
 import hashlib
 from google.protobuf import empty_pb2
 
@@ -21,6 +21,7 @@ class PSIServicer(psi_pb2_grpc.DataTransferServicer):
         self.Y_sorted = None
         self.received_encrypted_array = None # Received from another server
         self.received_pairs = None
+        self.psi_subset = None
 
     def _encrypt(self, array):
         result = np.array([pow(int(x), self.private_key, self.domain["p"]) for x in array], dtype=np.uint64)
@@ -72,6 +73,18 @@ class PSIServicer(psi_pb2_grpc.DataTransferServicer):
         print(f"Received pairs: {self.received_pairs}")
         return empty_pb2.Empty()
     
+    def CompareValues(self, request, context):
+        Z = np.array([x.fy for x in self.received_pairs],dtype=np.uint64)
+        f_received_encrypted_array = self._encrypt(self.received_encrypted_array)
+        mask = np.isin(Z, f_received_encrypted_array)
+        selected_y = np.array([x.y for x in self.received_pairs], dtype=np.uint64)[mask]
+        local_dataset_indexes = np.where(np.isin(self.Y, selected_y))[0]
+        self.psi_subset = Subset(self.dataset, local_dataset_indexes)
+        print("Common elements:")
+        for sample in self.psi_subset:
+            print(sample)
+
+        return empty_pb2.Empty()
     
 def serve(dataset, port):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
