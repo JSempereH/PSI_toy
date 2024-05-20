@@ -1,6 +1,7 @@
 
 
 ```
+python -m venv psi_toy
 source psi_toy/bin/activate
 ```
 
